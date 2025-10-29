@@ -1,0 +1,4 @@
+/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build/CMakeFiles/stm32f407_project.elf.dir
+/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build/CMakeFiles/copy_compile_commands.dir
+/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build/CMakeFiles/edit_cache.dir
+/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build/CMakeFiles/rebuild_cache.dir

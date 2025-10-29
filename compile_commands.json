@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build",
+  "command": "arm-none-eabi-g++ -DSTM32F407xx -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Device/ST/STM32F4xx/Include -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -O2 -fno-exceptions -ffunction-sections -fdata-sections -o CMakeFiles/stm32f407_project.elf.dir/src/main.cpp.o -c /home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/main.cpp",
+  "file": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/main.cpp",
+  "output": "CMakeFiles/stm32f407_project.elf.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build",
+  "command": "arm-none-eabi-gcc -DSTM32F407xx -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Device/ST/STM32F4xx/Include -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -x assembler-with-cpp -o CMakeFiles/stm32f407_project.elf.dir/src/startup_stm32f407xx.s.o -c /home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/startup_stm32f407xx.s",
+  "file": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/startup_stm32f407xx.s",
+  "output": "CMakeFiles/stm32f407_project.elf.dir/src/startup_stm32f407xx.s.o"
+},
+{
+  "directory": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/build",
+  "command": "arm-none-eabi-gcc -DSTM32F407xx -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Include -I/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/Drivers/CMSIS/Device/ST/STM32F4xx/Include -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -O2 -ffunction-sections -fdata-sections -o CMakeFiles/stm32f407_project.elf.dir/src/system_stm32f4xx.c.o -c /home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/system_stm32f4xx.c",
+  "file": "/home/hasan/workspace/stm32_projects_cmake/stm32_bare_metal_empty_cmake/src/system_stm32f4xx.c",
+  "output": "CMakeFiles/stm32f407_project.elf.dir/src/system_stm32f4xx.c.o"
+}
+]
