@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "cmake --build --preset Debug",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "flash",
+      "type": "shell",
+      "command": "openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c \"program build/stm32f407_project.elf verify reset exit\"",
+      "group": "none",
+      "problemMatcher": []
+    },
+    //Debugging Task
+    {
+      "label": "Start OpenOCD",
+      "type": "shell",
+      "command": "openocd",
+      "args": [
+        "-f",
+        "interface/stlink.cfg",
+        "-f",
+        "target/stm32f4x.cfg"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Open On-Chip Debugger",
+          "endsPattern": "Listening on port 3333 for gdb connections"
+        }
+      }
+    },
+    {
+      "label": "Stop OpenOCD",
+      "type": "shell",
+      "command": "killall openocd",
+      "problemMatcher": []
+    }
+  ]
+}
