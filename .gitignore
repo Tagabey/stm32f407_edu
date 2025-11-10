@@ -1,2 +1,4 @@
 build
 !.settings
+compile_commands.json
+local_backup
