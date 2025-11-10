@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug STM32 (Cortex-Debug)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+
+            "executable": "${workspaceFolder}/build/Debug/real_time_cpp.elf",
+
+            "device": "STM32F407VG",           // Adjust for your MCU
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+
+            "cwd": "${workspaceFolder}",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "build",          // optional
+
+            "svdFile": "${workspaceFolder}/STM32F407.svd", // optional, for register view
+            "showDevDebugOutput": "raw"
+        }
+    ]
+}
