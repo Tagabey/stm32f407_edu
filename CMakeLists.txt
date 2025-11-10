@@ -1,59 +1,62 @@
 cmake_minimum_required(VERSION 3.15)
-project(stm32f407_project C CXX ASM)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Define the build type (also it is defined in CMakePreset.json file)
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug")
+endif()
+
+set(CMAKE_PROJECT_NAME real_time_cpp)
 
 # Enable compile_commands.json for IntelliSense
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_definitions(-DSTM32F407xx)
 
-# MCU settings
-set(MCU_FAMILY STM32F4xx)
-set(MCU_MODEL STM32F407xx)
-set(MCU_FLAGS "-mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard")
+# Core project settings
+project(${CMAKE_PROJECT_NAME})
+message("Build type: " ${CMAKE_BUILD_TYPE})
 
-# Toolchain
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR arm)
 
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+enable_language(C ASM CXX)
 
-# Linker script
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/linker/STM32F407XX_FLASH.ld)
+add_executable(${CMAKE_PROJECT_NAME})
 
-# Compiler options
-set(CMAKE_C_FLAGS "${MCU_FLAGS} -O2 -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS "${MCU_FLAGS} -O2 -fno-exceptions -ffunction-sections -fdata-sections")
-set(CMAKE_ASM_FLAGS "${MCU_FLAGS} -x assembler-with-cpp")
-set(CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} -Wl,--gc-sections")
+add_subdirectory(cmake/custom_system)
 
-# Source files
-file(GLOB_RECURSE SOURCES
-    "src/*.c"
-    "src/*.cpp"
-    "src/*.s"
+target_link_directories(${CMAKE_PROJECT_NAME}
+    PRIVATE
+    # add user defined library search path
 )
 
-# Include paths
-include_directories(
-    include
-    Drivers/CMSIS/Include
-    Drivers/CMSIS/Device/ST/STM32F4xx/Include
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+    # add user sources here
 )
 
-# Define target
-add_executable(${PROJECT_NAME}.elf ${SOURCES})
-
-# Post-build commands (size + binary)
-add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND arm-none-eabi-size ${PROJECT_NAME}.elf
-    COMMAND arm-none-eabi-objcopy -O ihex ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
-    COMMAND arm-none-eabi-objcopy -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    # add user defined include paths
 )
 
-# Optional: copy compile_commands.json to root for VS Code IntelliSense
-add_custom_target(copy_compile_commands ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_BINARY_DIR}/compile_commands.json
-        ${CMAKE_SOURCE_DIR}/compile_commands.json
+target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
+    # add user defined symbols
+)
+
+list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    # CMSIS_lib
+    # add user defined libraries ex: stm32cubemx
+)
+
+# Post build commands
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary
+        $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+        ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
+    COMMENT "Generating binary file from ELF"
 )
